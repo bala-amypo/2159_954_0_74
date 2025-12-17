@@ -27,5 +27,12 @@ public class Studctl{
         return ser.getAll();
     }
     @PutMapping("/update/{id}")
-    public 
+    public Studentity updateStudent(@PathVariable int id,@RequestBody Studentity st){
+        Studentity updated = ser.updateStudent(id,st);
+        if(updated!=null){
+            return updated;
+        }else{
+            throw new RuntimeException("Student with ID "+id+"not found");
+        }
+    }
 }
