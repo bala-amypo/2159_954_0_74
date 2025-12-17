@@ -20,5 +20,12 @@ public class Studentservice{
     public Map<integer,Studentity>getAllStudents(){
         return details;
     }
-    public Studentity updateStudent(int id,Studentity st)
+    public Studentity updateStudent(int id,Studentity st){
+        if(details.containsKey(id)){
+            details.put(id,st);
+            return st;
+        }
+        return null;
+    }
+    }
 }
