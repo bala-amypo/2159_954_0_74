@@ -4,16 +4,16 @@ import java.util.*;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.UserEntity;
+import com.example.demo.entity.Userentity;
 
 @Service
 public class UserImpl implements UserServices {
 
-    private final Map<Long, UserEntity> store = new HashMap<>();
+    private final Map<Long, Userentity> store = new HashMap<>();
     private long counter = 1;
 
     @Override
-    public UserEntity insertUser(UserEntity user) {
+    public Userentity insertUser(Userentity user) {
       
         if (user.getId() == null) {
             user.setId(counter++);
@@ -23,12 +23,12 @@ public class UserImpl implements UserServices {
     }
 
     @Override
-    public List<UserEntity> getAllUser() {
+    public List<Userentity> getAllUser() {
         return new ArrayList<>(store.values());
     }
 
     @Override
-    public Optional<UserEntity> getOneUser(Long id) {
+    public Optional<Userentity> getOneUser(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 

@@ -5,13 +5,13 @@ import java.util.Optional;
 
 import com.example.demo.entity.UserEntity;
 
-public interface UserServices {
+public interface Userservices {
 
-    UserEntity insertUser(UserEntity user);
+    Userentity insertUser(Userentity user);
 
-    List<UserEntity> getAllUser();
+    List<Userentity> getAllUser();
 
-    Optional<UserEntity> getOneUser(Long id);
+    Optional<Userentity> getOneUser(Long id);
 
     void deleteUser(Long id);
 }

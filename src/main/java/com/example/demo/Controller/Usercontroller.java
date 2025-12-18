@@ -16,7 +16,7 @@ public class Usercontroller {
         this.userService = userService;
     }
     @PostMapping
-    public Userentity createUser(@RequestBody UserEntity user) {
+    public Userentity createUser(@RequestBody Userentity user) {
         return userService.insertUser(user);
     }
     @GetMapping
@@ -28,12 +28,12 @@ public class Usercontroller {
         return userService.getOneUser(id);
     }
     @PutMapping("/{id}")
-    public String updateUser(@PathVariable Long id, @RequestBody UserEntity userData) {
+    public String updateUser(@PathVariable Long id, @RequestBody Userentity userData) {
 
         Optional<Userentity> existingUser = userService.getOneUser(id);
 
         if (existingUser.isPresent()) {
-            UserEntity user = existingUser.get();
+            Userentity user = existingUser.get();
 
             user.setName(userData.getName());
             user.setEmail(userData.getEmail());
@@ -49,7 +49,7 @@ public class Usercontroller {
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
 
-        Optional<UserEntity> user = userService.getOneUser(id);
+        Optional<Userentity> user = userService.getOneUser(id);
 
         if (user.isPresent()) {
             userService.deleteUser(id);
