@@ -5,57 +5,46 @@ import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.entity.UserEntity;
-import com.example.demo.services.UserServices;
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
 
 @RestController
-@RequestMapping("/user")
-public class Usercontroller {
-    private final UserServices userService;
-    public UserController(UserServices userService) {
+@RequestMapping("/users")
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    // CREATE
     @PostMapping
-    public Userentity createUser(@RequestBody Userentity user) {
+    public User postUser(@RequestBody User user) {
         return userService.insertUser(user);
     }
+
+    // READ ALL
     @GetMapping
-    public List<Userentity> getAllUsers() {
-        return userService.getAllUser();
+    public List<User> getAll() {
+        return userService.getAllUsers();
     }
+
+    // READ ONE
     @GetMapping("/{id}")
-    public Optional<Userentity> getUserById(@PathVariable Long id) {
+    public Optional<User> getById(@PathVariable Long id) {
         return userService.getOneUser(id);
     }
-    @PutMapping("/{id}")
-    public String updateUser(@PathVariable Long id, @RequestBody Userentity userData) {
 
-        Optional<Userentity> existingUser = userService.getOneUser(id);
-
-        if (existingUser.isPresent()) {
-            Userentity user = existingUser.get();
-
-            user.setName(userData.getName());
-            user.setEmail(userData.getEmail());
-            user.setPassword(userData.getPassword());
-            user.setRole(userData.getRole());
-
-            userService.insertUser(user);
-            return "User Updated Successfully";
-        }
-
-        return "User Not Found";
-    }
+    // DELETE
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Long id) {
-
-        Optional<Userentity> user = userService.getOneUser(id);
+        Optional<User> user = userService.getOneUser(id);
 
         if (user.isPresent()) {
             userService.deleteUser(id);
-            return "User Deleted Successfully";
+            return "Deleted Successfully ✅";
         }
-
-        return "User Not Found";
+        return "User Not Found ❌";
     }
 }
