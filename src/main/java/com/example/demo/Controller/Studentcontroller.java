@@ -10,7 +10,7 @@ import com.example.demo.services.Studservice;
 
 @RestController
 @RequestMapping("/student")
-public class Studctl{
+public class Studentcontroller{
     @Autowired
     Studservice ser;
     @PostMapping("/add")
