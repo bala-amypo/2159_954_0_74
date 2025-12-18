@@ -10,27 +10,27 @@ import com.example.demo.services.UserServices;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class Usercontroller {
     private final UserServices userService;
     public UserController(UserServices userService) {
         this.userService = userService;
     }
     @PostMapping
-    public UserEntity createUser(@RequestBody UserEntity user) {
+    public Userentity createUser(@RequestBody UserEntity user) {
         return userService.insertUser(user);
     }
     @GetMapping
-    public List<UserEntity> getAllUsers() {
+    public List<Userentity> getAllUsers() {
         return userService.getAllUser();
     }
     @GetMapping("/{id}")
-    public Optional<UserEntity> getUserById(@PathVariable Long id) {
+    public Optional<Userentity> getUserById(@PathVariable Long id) {
         return userService.getOneUser(id);
     }
     @PutMapping("/{id}")
     public String updateUser(@PathVariable Long id, @RequestBody UserEntity userData) {
 
-        Optional<UserEntity> existingUser = userService.getOneUser(id);
+        Optional<Userentity> existingUser = userService.getOneUser(id);
 
         if (existingUser.isPresent()) {
             UserEntity user = existingUser.get();
