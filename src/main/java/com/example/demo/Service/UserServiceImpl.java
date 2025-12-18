@@ -1,37 +1,39 @@
 package com.example.demo.service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+
 import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepo;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final Map<Long, User> store = new HashMap<>();
-    private long counter = 1;
+    private final UserRepo userRepo;
+
+    public UserServiceImpl(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
     @Override
     public User insertUser(User user) {
-        user.setId(counter++);
-        if (user.getRole() == null) {
-            user.setRole("USER");
-        }
-        store.put(user.getId(), user);
-        return user;
+        return userRepo.save(user);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return new ArrayList<>(store.values());
+        return userRepo.findAll();
     }
 
     @Override
     public Optional<User> getOneUser(Long id) {
-        return Optional.ofNullable(store.get(id));
+        return userRepo.findById(id);
     }
 
     @Override
     public void deleteUser(Long id) {
-        store.remove(id);
+        userRepo.deleteById(id);
     }
 }

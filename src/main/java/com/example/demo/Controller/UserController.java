@@ -19,23 +19,22 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User addUser(@RequestBody User user) {
         return userService.insertUser(user);
     }
 
     @GetMapping
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public Optional<User> getById(@PathVariable Long id) {
+    public Optional<User> getUser(@PathVariable Long id) {
         return userService.getOneUser(id);
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
+    public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "Deleted Successfully";
     }
 }
