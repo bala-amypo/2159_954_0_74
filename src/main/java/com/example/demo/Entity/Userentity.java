@@ -2,27 +2,31 @@ package com.example.project1.entity;
 
 public class User {
 
-    private int id;
+    private long id;
     private String name;
     private String email;
+    private String password;
+    private String role;
 
-    // No-arg constructor
+    // No-argument constructor
     public User() {
     }
 
     // Parameterized constructor
-    public User(int id, String name, String email) {
+    public User(long id, String name, String email, String password, String role) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     // Getter & Setter for id
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -42,5 +46,23 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    // Getter & Setter for password
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    // Getter & Setter for role
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
