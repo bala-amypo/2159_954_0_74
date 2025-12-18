@@ -18,33 +18,24 @@ public class UserController {
         this.userService = userService;
     }
 
-    // CREATE
     @PostMapping
-    public User postUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         return userService.insertUser(user);
     }
 
-    // READ ALL
     @GetMapping
     public List<User> getAll() {
         return userService.getAllUsers();
     }
 
-    // READ ONE
     @GetMapping("/{id}")
     public Optional<User> getById(@PathVariable Long id) {
         return userService.getOneUser(id);
     }
 
-    // DELETE
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        Optional<User> user = userService.getOneUser(id);
-
-        if (user.isPresent()) {
-            userService.deleteUser(id);
-            return "Deleted Successfully ✅";
-        }
-        return "User Not Found ❌";
+    public String delete(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "Deleted Successfully";
     }
 }

@@ -1,34 +1,32 @@
-package com.example.demo.services;
+package com.example.demo.service;
 
 import java.util.*;
-
 import org.springframework.stereotype.Service;
-
-import com.example.demo.entity.Userentity;
+import com.example.demo.entity.User;
 
 @Service
-public class UserImpl implements UserServices {
+public class UserServiceImpl implements UserService {
 
-    private final Map<Long, Userentity> store = new HashMap<>();
+    private final Map<Long, User> store = new HashMap<>();
     private long counter = 1;
 
     @Override
-    public Userentity insertUser(Userentity user) {
-      
-        if (user.getId() == null) {
-            user.setId(counter++);
+    public User insertUser(User user) {
+        user.setId(counter++);
+        if (user.getRole() == null) {
+            user.setRole("USER");
         }
         store.put(user.getId(), user);
         return user;
     }
 
     @Override
-    public List<Userentity> getAllUser() {
+    public List<User> getAllUsers() {
         return new ArrayList<>(store.values());
     }
 
     @Override
-    public Optional<Userentity> getOneUser(Long id) {
+    public Optional<User> getOneUser(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 
