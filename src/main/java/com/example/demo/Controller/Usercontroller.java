@@ -9,7 +9,7 @@ import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 
 @RestController
-@RequestMapping("/users")   // better REST naming (lowercase & plural)
+@RequestMapping("/users")   // better REST naming (lowercase & plural).
 public class UserController {
 
     private final UserService userService;
@@ -50,9 +50,9 @@ public class UserController {
             existingUser.setPassword(user.getPassword()); // example field
 
             userService.insertUser(existingUser);
-            return "Updated Successfully ✅";
+            return "Updated Successfully ";
         }
-        return "User Not Found ❌";
+        return "User Not Found ";
     }
 
     // DELETE
@@ -63,8 +63,8 @@ public class UserController {
 
         if (user.isPresent()) {
             userService.deleteUser(id);
-            return "Deleted Successfully ✅";
+            return "Deleted Successfully ";
         }
-        return "User Not Found ❌";
+        return "User Not Found ";
     }
 }
