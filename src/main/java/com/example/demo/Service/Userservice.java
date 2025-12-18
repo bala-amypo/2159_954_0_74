@@ -1,17 +1,47 @@
 package com.example.demo.service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.User;
 
-public interface UserService {
+@Service
+public class UserServiceImpl implements UserService {
 
-    User insertUser(User user);
+    // In-memory storage
+    private final Map<Long, User> store = new HashMap<>();
+    private long counter = 1;
 
-    List<User> getAllUsers();
+    @Override
+    public User insertUser(User user) {
 
-    Optional<User> getOneUser(Long id);
+        // Auto-generate ID
+        user.setId(counter++);
 
-    void deleteUser(Long id);
+        // Default role logic
+        if (user.getRole() == null || user.getRole().isEmpty()) {
+            user.setRole("USER");
+        }
+
+        // Save user
+        store.put(user.getId(), user);
+        return user;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public Optional<User> getOneUser(Long id) {
+        return Optional.ofNullable(store.get(id));
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        store.remove(id);
+    }
 }
+0
